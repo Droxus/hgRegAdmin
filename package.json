@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "vite": "^5.4.3"
+  },
+  "name": "hgregadmin",
+  "description": "",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "esbuild": "^0.21.5",
+    "fsevents": "^2.3.3",
+    "nanoid": "^3.3.7",
+    "picocolors": "^1.1.0",
+    "postcss": "^8.4.45",
+    "rollup": "^4.21.2",
+    "source-map-js": "^1.2.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
