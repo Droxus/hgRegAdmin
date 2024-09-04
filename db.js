@@ -9,6 +9,12 @@ import {
   deleteDoc,
   updateDoc,
 } from "firebase/firestore";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,6 +34,39 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const analytics = getAnalytics(app);
+
+const auth = getAuth(app);
+
+// Set up Google provider
+const provider = new GoogleAuthProvider();
+
+// Sign in with Google
+export async function signInWithGoogle() {
+  return new Promise((resolve) => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        resolve(true);
+      })
+      .catch((error) => {
+        resolve(false);
+      });
+    resolve(false);
+  });
+}
+
+// Check if user is already logged in
+export async function checkUserLoginStatus() {
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
+}
+
 const RESERVED_ID = "test";
 
 const data = {
@@ -66,8 +105,6 @@ export async function getData(force = false) {
     return data;
   }
 
-  console.log("Getting data from firebase;");
-
   data.services.advanced = await getCollection("Data/Services/Advanced");
   data.services.basic = await getCollection("Data/Services/Basic");
   data.services.ultra = await getCollection("Data/Services/Ultra");
@@ -80,8 +117,6 @@ export async function getBin() {
   if (bin.imported) {
     return bin;
   }
-
-  console.log("Getting data from firebase;");
 
   bin.services.advanced = await getCollection("Bin/Services/Advanced");
   bin.services.basic = await getCollection("Bin/Services/Basic");
@@ -96,7 +131,6 @@ export async function deleteForm(id) {
 
   try {
     await deleteDoc(thisDoc);
-    console.log(`Document with ID: ${id} has been deleted from collection.`);
     getData(true);
   } catch (error) {
     console.error(
@@ -111,7 +145,6 @@ export async function editForm(id, newForm) {
 
   try {
     await updateDoc(thisForm, newForm);
-    console.log(`Document with ID: ${id} has been edited.`);
     getData(true);
   } catch (error) {
     console.error(`Failed to edit document with ID: ${id}.`, error);
@@ -137,7 +170,6 @@ function getDocRef(id) {
   }
 
   const path = `Data/Services/${collection}`;
-  console.log(path);
   const thisDoc = doc(db, path, id);
   return thisDoc;
 }
