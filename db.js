@@ -75,6 +75,7 @@ const data = {
     advanced: {},
     basic: {},
     ultra: {},
+    others: {},
   },
 };
 
@@ -84,6 +85,7 @@ const bin = {
     advanced: {},
     basic: {},
     ultra: {},
+    others: {},
   },
 };
 
@@ -108,6 +110,7 @@ export async function getData(force = false) {
   data.services.advanced = await getCollection("Data/Services/Advanced");
   data.services.basic = await getCollection("Data/Services/Basic");
   data.services.ultra = await getCollection("Data/Services/Ultra");
+  data.services.others = await getCollection("Data/Services/Others");
   data.imported = true;
 
   return data;
@@ -121,6 +124,7 @@ export async function getBin() {
   bin.services.advanced = await getCollection("Bin/Services/Advanced");
   bin.services.basic = await getCollection("Bin/Services/Basic");
   bin.services.ultra = await getCollection("Bin/Services/Ultra");
+  bin.services.others = await getCollection("Bin/Services/Others");
   bin.imported = true;
 
   return bin;
@@ -153,7 +157,7 @@ export async function editForm(id, newForm) {
 
 function getDocRef(id) {
   const services = data.services;
-  const collections = ["advanced", "basic", "ultra"];
+  const collections = ["advanced", "basic", "ultra", "others"];
   let collection = "";
   let keyCollecation = "";
 
