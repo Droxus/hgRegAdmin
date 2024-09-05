@@ -145,6 +145,7 @@ function showAdminPanelBlock() {
   );
 
   document.getElementById("closePopupBtn").addEventListener("click", () => {
+    location.reload();
     document.getElementById("popup").style.display = "none";
   });
 
