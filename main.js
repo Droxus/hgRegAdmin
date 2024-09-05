@@ -23,10 +23,10 @@ async function auth() {
 
 async function runProgram() {
   showAdminPanelBlock();
-  console.log("Hello here");
-  console.log(await getData());
-  console.log(await getData());
-  console.log(await getData());
+  // console.log("Hello here");
+  // console.log(await getData());
+  // console.log(await getData());
+  // console.log(await getData());
 
   // console.log(await getBin());
   // console.log(await getBin());
@@ -50,16 +50,122 @@ function removeAllChildren(id) {
   }
 }
 
+let openedPopup;
+function openPopup(event) {
+  event.stopPropagation();
+  const row = event.target.parentElement;
+  if (!row.id) {
+    return;
+  }
+
+  // console.log(row);
+  openedPopup = row.id;
+  document.getElementById("popupTextarea").value = JSON.stringify(
+    allData[row.id],
+    null,
+    2
+  );
+  document.getElementById("popup").style.display = "flex";
+}
+
+let allData = {};
+async function addRows() {
+  const data = await getData();
+  // const services = data.services;
+  const advancedService = data.services.advanced;
+  const basicService = data.services.basic;
+  const ultraService = data.services.ultra;
+  const othersService = data.services.others;
+
+  allData = Object.assign(
+    {},
+    advancedService,
+    basicService,
+    ultraService,
+    othersService
+  );
+
+  Object.entries(allData).forEach(([key, value], index) => {
+    // console.log(key, value);
+    document.getElementsByClassName("table")[0].insertAdjacentHTML(
+      "beforeend",
+      `
+        <div class="table-row" id="${key}">
+          <div class="table-cell">${index + 1}</div>
+          <div class="table-cell">${value.name ?? "-"}</div>
+          <div class="table-cell">${value.surname ?? "-"}</div>
+          <div class="table-cell">${value.phone ?? "-"}</div>
+          <div class="table-cell">${value.email ?? "-"}</div>
+            <div class="table-cell">${"05.09.2024"}</div>
+      </div>  
+    `
+    );
+  });
+
+  Array.from(document.getElementsByClassName("table-row")).forEach((rowBtn) => {
+    // console.log(rowBtn);
+    rowBtn.addEventListener("click", (event) => {
+      // console.log(event);
+      openPopup(event);
+    });
+  });
+}
+
 function showAdminPanelBlock() {
   removeAllChildren("app");
   document.getElementById("app").insertAdjacentHTML(
-    "afterbegin",
+    "beforeend",
     `
     <div id="adminPanelBlock">
-
+      <div class="table">
+        <!-- Header Row -->
+        <div class="table-row header">
+            <div class="table-cell">№</div>
+            <div class="table-cell">Имя</div>
+            <div class="table-cell">Фамилия</div>
+            <div class="table-cell">Телефон</div>
+            <div class="table-cell">Почта</div>
+            <div class="table-cell">Дата</div>
+        </div>
+      </div>
+      <div id="popup">
+        <div id="popupContainer">
+          <div>
+          <button id="closePopupBtn">Close</button>
+          <button id="deletePopupBtn">Delete</button>
+          <button id="editPopupBtn">Edit</button>
+          <label></label>
+          </div>
+          <textarea id="popupTextarea">
+          </textarea>
+        </div>
+      </div>
     </div>
   `
   );
+
+  document.getElementById("closePopupBtn").addEventListener("click", () => {
+    document.getElementById("popup").style.display = "none";
+  });
+
+  document
+    .getElementById("deletePopupBtn")
+    .addEventListener("click", async () => {
+      await deleteForm(openedPopup);
+      document.getElementById("popup").style.display = "none";
+      location.reload();
+    });
+
+  document
+    .getElementById("editPopupBtn")
+    .addEventListener("click", async () => {
+      await editForm(
+        openedPopup,
+        JSON.parse(document.getElementById("popupTextarea").value)
+      );
+    });
+
+  addRows();
 }
 
 function showRegFormBlock() {

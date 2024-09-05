@@ -77,3 +77,79 @@ html, body {
   color: yellow;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f5f5f5;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 5 equal-width columns */
+  row-gap: 5px;
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+}
+
+.table-row {
+  display: contents;
+}
+
+.table-cell {
+  padding: 12px;
+  background-color: #fff;
+  /* border: 1px solid #ddd; */
+  text-align: center;
+}
+
+/* Header Row Styling */
+.header .table-cell {
+  background-color: #00796b;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .table {
+      grid-template-columns: repeat(2, 1fr); /* Adjust for smaller screens */
+  }
+
+  .header .table-cell {
+      grid-column: span 2; /* Make header span two columns on smaller screens */
+  }
+
+  .table-row .table-cell {
+      grid-column: span 2; /* Make data cells span two columns on smaller screens */
+  }
+}
+
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  /* display: flex; */
+  display: none;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#popupContainer {
+  width: 500px;
+  height: 800px;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100px 700px;
+  padding: 20px;
+  background: #357ae8;
+}
