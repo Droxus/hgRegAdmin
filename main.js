@@ -194,12 +194,12 @@ function showLoginFailureBlock() {
 }
 
 async function main() {
-  showRegFormBlock();
-  const signInResult = await auth();
-  if (!signInResult) {
-    showLoginFailureBlock();
-    return;
-  }
+  // showRegFormBlock();
+  // const signInResult = await auth();
+  // if (!signInResult) {
+  //   showLoginFailureBlock();
+  //   return;
+  // }
 
   await runProgram();
 }
