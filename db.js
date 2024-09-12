@@ -31,9 +31,11 @@ export default class DataBase {
   async signInWithGoogle() {
     try {
       const user = await Auth.signInWithPopup(this.auth, this.provider);
-      this.#user.displayName = user.displayName;
-      this.#user.email = user.email;
-      this.#user.photoURL = user.photoURL;
+      if (user) {
+        this.#user.displayName = user.displayName;
+        this.#user.email = user.email;
+        this.#user.photoURL = user.photoURL;
+      }
       return true;
     } catch (error) {
       console.error("Error during sign-in:", error);
@@ -44,9 +46,11 @@ export default class DataBase {
   async checkUserLoginStatus() {
     return new Promise((resolve) =>
       Auth.onAuthStateChanged(this.auth, (user) => {
-        this.#user.displayName = user.displayName;
-        this.#user.email = user.email;
-        this.#user.photoURL = user.photoURL;
+        if (user) {
+          this.#user.displayName = user.displayName;
+          this.#user.email = user.email;
+          this.#user.photoURL = user.photoURL;
+        }
         resolve(!!user);
       })
     );
