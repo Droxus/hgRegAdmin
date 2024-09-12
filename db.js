@@ -3,6 +3,16 @@ import { getAnalytics } from "firebase/analytics";
 import * as Firestore from "firebase/firestore";
 import * as Auth from "firebase/auth";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBwTbTG_auMrWy_e4aVUFMHs3794zZ4AXE",
+  authDomain: "hgregusersdb.firebaseapp.com",
+  projectId: "hgregusersdb",
+  storageBucket: "hgregusersdb.appspot.com",
+  messagingSenderId: "996459139126",
+  appId: "1:996459139126:web:c4f73b0298e90734618897",
+  measurementId: "G-J4RYP9B18W",
+};
+
 export default class DataBase {
   app;
   db;
@@ -15,12 +25,10 @@ export default class DataBase {
   #user;
 
   constructor() {
-    console.log(import.meta.env.VITE_FIREBASE_TOKEN);
-    console.log(atob(import.meta.env.VITE_FIREBASE_TOKEN));
-    console.log(JSON.parse(atob(import.meta.env.VITE_FIREBASE_TOKEN)));
-    this.app = initializeApp(
-      JSON.parse(atob(import.meta.env.VITE_FIREBASE_TOKEN))
-    );
+    // console.log(import.meta.env.VITE_FIREBASE_TOKEN);
+    // console.log(atob(import.meta.env.VITE_FIREBASE_TOKEN));
+    // console.log(JSON.parse(atob(import.meta.env.VITE_FIREBASE_TOKEN)));
+    this.app = initializeApp(firebaseConfig);
     this.db = Firestore.getFirestore(this.app);
     this.analytics = getAnalytics(this.app);
     this.auth = Auth.getAuth(this.app);
