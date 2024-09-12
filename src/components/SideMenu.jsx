@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import SelectContent from "./SelectContent";
 import MenuContent from "./MenuContent";
 import OptionsMenu from "./OptionsMenu";
+import { useData } from '../DataContext';
 
 const drawerWidth = 240;
 
@@ -24,6 +25,8 @@ const Drawer = styled(MuiDrawer)({
 });
 
 export default function SideMenu({ page, setPage }) {
+  const { db } = useData();
+
   return (
     <Drawer
       variant="permanent"
@@ -58,7 +61,7 @@ export default function SideMenu({ page, setPage }) {
         <Avatar
           sizes="small"
           alt="Riley Carter"
-          src="/static/images/avatar/7.jpg"
+          src={db.user.photoURL}
           sx={{ width: 36, height: 36 }}
         />
         <Box sx={{ mr: "auto" }}>
@@ -66,10 +69,10 @@ export default function SideMenu({ page, setPage }) {
             variant="body2"
             sx={{ fontWeight: 500, lineHeight: "16px" }}
           >
-            Riley Carter
+            {db.user.displayName}
           </Typography>
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            riley@email.com
+            {db.user.email}
           </Typography>
         </Box>
         <OptionsMenu />

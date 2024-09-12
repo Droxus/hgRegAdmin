@@ -54,7 +54,12 @@ ButtonField.propTypes = {
 };
 
 export default function CustomDatePicker() {
-  const [value, setValue] = React.useState(dayjs('2023-04-17'));
+  const currentDate = new Date();
+  const year = String(currentDate.getFullYear())
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0')
+  const day = String(currentDate.getDate()).padStart(2, '0')
+  // const [value, setValue] = React.useState(dayjs('2023-04-17'));
+  const [value, setValue] = React.useState(dayjs(`${year}-${month}-${day}`));
   const [open, setOpen] = React.useState(false);
 
   return (

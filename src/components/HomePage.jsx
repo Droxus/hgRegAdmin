@@ -6,6 +6,8 @@ import CustomizedDataGrid from "./CustomizedDataGrid";
 import AboveTablePanel from "./AboveTablePanel"
 
 export default function HomePage() {
+  const [selectedRowIds, setSelectedRowIds] = React.useState([]);
+
   return (
     <>
       <Typography component="h2" variant="h6" sx={{ mb: 0 }}>
@@ -13,12 +15,12 @@ export default function HomePage() {
       </Typography>
       <Grid container spacing={0} columns={12}>
         <Grid size={{ md: 12, lg: 12 }}>
-          <AboveTablePanel />
+          <AboveTablePanel selectedRowIds={selectedRowIds} page={"Home"}/>
         </Grid>
       </Grid>
       <Grid container spacing={2} columns={12}>
         <Grid size={{ md: 12, lg: 12 }}>
-          <CustomizedDataGrid />
+          <CustomizedDataGrid selectedRowIds={selectedRowIds} setSelectedRowIds={setSelectedRowIds} page={"Home"}/>
         </Grid>
       </Grid>
       <Copyright sx={{ my: 4 }} />

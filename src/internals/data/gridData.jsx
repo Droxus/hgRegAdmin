@@ -6,6 +6,9 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { SparkLineChart } from '@mui/x-charts/SparkLineChart';
 import { Button } from '@mui/material';
 
+import { usePopup } from '../../Dashboard';
+import { useData } from '../../DataContext';
+
 function getDaysInMonth(month, year) {
   const date = new Date(year, month, 0);
   const monthName = date.toLocaleDateString('en-US', {
@@ -21,11 +24,11 @@ function getDaysInMonth(month, year) {
   return days;
 }
 
-function onOpenPopup(event) {
-  event.preventDefault()
-  event.stopPropagation()
-  console.log("Helo")
-}
+// function onOpenPopup(event) {
+//   event.preventDefault()
+//   event.stopPropagation()
+//   console.log("Helo")
+// }
 
 function renderSparklineCell(params) {
   const data = getDaysInMonth(4, 2024);
@@ -75,7 +78,7 @@ function renderStatus(status) {
 function renderDate(date) {
   const thisDate = new Date(date.seconds * 1000)
   const year = String(thisDate.getFullYear())
-  const month = String(thisDate.getMonth()).padStart(2, '0')
+  const month = String(thisDate.getMonth() + 1).padStart(2, '0')
   const day = String(thisDate.getDate()).padStart(2, '0')
   const hours = String(thisDate.getHours()).padStart(2, '0')
   const minutes = String(thisDate.getMinutes()).padStart(2, '0')
@@ -102,7 +105,12 @@ export function renderAvatar(params) {
 }
 
 function renderAction(param) {
-  return <Button onClick={onOpenPopup} startIcon={<OpenInNewIcon />}></Button>;
+  const { isPopupOpened, setPopupOpened } = usePopup();
+  const { selectedParam, setSelectedParam } = useData();
+
+  return (
+    <Button onClick={() => {setSelectedParam(param);setPopupOpened(true)}} startIcon={<OpenInNewIcon />}></Button>
+  );
 }
 
 export const columns = [
@@ -162,358 +170,358 @@ export const columns = [
     align: 'center',
     flex: 1,
     minWidth: 100,
-    renderCell: (params) => renderAction(params.value),
+    renderCell: (params) => renderAction(params.id),
   },
 ];
 
-export const rows = [
-  {
-      "interests": "",
-      "service": "Others",
-      "email": "33@dsf.sd",
-      "createdAt": {
-          "seconds": 1726010733,
-          "nanoseconds": 449000000
-      },
-      "surname": "Now",
-      "phone": "+11312312312",
-      "source": "",
-      "name": "Hola",
-      "id": "A3Bk4XcKPpLnUoQy8sm0"
-  },
-  {
-      "email": "john.doe@example.com",
-      "message": "This is a test message.",
-      "createdAt": {
-          "seconds": 1725981178,
-          "nanoseconds": 255000000
-      },
-      "name": "John Doe",
-      "id": "BWaqpbCT0TDMDa71sjcL"
-  },
-  {
-      "interests": "",
-      "service": "Others",
-      "name": "Nice",
-      "surname": "Nice",
-      "createdAt": {
-          "seconds": 1725984545,
-          "nanoseconds": 826000000
-      },
-      "phone": "+77777777777",
-      "source": "",
-      "email": "",
-      "id": "ES5BrqdC4cbHzCIrIlSl"
-  },
-  {
-      "surname": "Surnameassa",
-      "interests": "",
-      "service": "Others",
-      "phone": "+456789456789",
-      "name": "Name",
-      "email": "poshta@hg.com",
-      "source": "",
-      "createdAt": {
-          "seconds": 1726013876,
-          "nanoseconds": 929000000
-      },
-      "id": "EXLIl9XURE8zFfnagytj"
-  },
-  {
-      "nationality": "Somewhere",
-      "source": "I don't knw",
-      "mos": "44444444",
-      "name": "Hopa",
-      "inpol": "44444444",
-      "email": "",
-      "phone": "+55555555555",
-      "passport": "333333333",
-      "birthday": "2024-09-03",
-      "createdAt": {
-          "seconds": 1726009839,
-          "nanoseconds": 219000000
-      },
-      "surname": "Nonamovich",
-      "service": "Basic",
-      "id": "FjxxvfFY8UO8BtXK1qOc"
-  },
-  {
-      "surname": "Heck",
-      "email": "hhhgg@sdf.sdf",
-      "phone": "+3456789876543",
-      "createdAt": {
-          "seconds": 1726015433,
-          "nanoseconds": 819000000
-      },
-      "service": "Others",
-      "name": "MyName",
-      "interests": "Nothing literally",
-      "source": "From instagram",
-      "id": "H0EsMFYTQ9XdHl2vDw1G"
-  },
-  {
-      "phone": "+3412123123",
-      "name": "saadas",
-      "createdAt": {
-          "seconds": 1726011832,
-          "nanoseconds": 997000000
-      },
-      "source": "",
-      "service": "Others",
-      "email": "dad@sdfs.fsd",
-      "interests": "",
-      "surname": "asdasd",
-      "id": "HYUBytu6eei1KMeLm1VD"
-  },
-  {
-      "interests": "",
-      "surname": "ss",
-      "service": "Others",
-      "phone": "+22112222222",
-      "email": "",
-      "source": "",
-      "name": "ss",
-      "createdAt": {
-          "seconds": 1725983330,
-          "nanoseconds": 224000000
-      },
-      "id": "NSHSbXv8bcevAkRjXaMf"
-  },
-  {
-      "createdAt": {
-          "seconds": 1726005870,
-          "nanoseconds": 512000000
-      },
-      "source": "IDK",
-      "surname": "Noname",
-      "interests": "",
-      "email": "",
-      "phone": "+222222222222",
-      "name": "Kekw",
-      "service": "Others",
-      "id": "Orx2NRe2s0mSnlWXIUwq"
-  },
-  {
-      "email": "",
-      "name": "sdfs",
-      "interests": "",
-      "surname": "dfsdf",
-      "phone": "+33333333333",
-      "createdAt": {
-          "seconds": 1726005462,
-          "nanoseconds": 328000000
-      },
-      "service": "Others",
-      "source": "",
-      "id": "TzZmc0mE91WgPLsLVdBF"
-  },
-  {
-      "service": "Basic",
-      "email": "fff@ff.f",
-      "passport": "D23424234",
-      "birthday": "2024-09-10",
-      "nationality": "sdfsdf",
-      "inpol": "22222222",
-      "name": "dsff",
-      "source": "",
-      "phone": "+21312312312",
-      "createdAt": {
-          "seconds": 1726009735,
-          "nanoseconds": 191000000
-      },
-      "surname": "sdsdf",
-      "mos": "22222222",
-      "id": "Vx3GE0P1QWCwGJ7Ofzwg"
-  },
-  {
-      "service": "Others",
-      "interests": "",
-      "createdAt": {
-          "seconds": 1726010807,
-          "nanoseconds": 306000000
-      },
-      "source": "",
-      "phone": "+123123123123",
-      "surname": "dfsdf",
-      "name": "dsfdsfs",
-      "email": "sdfsd@sdff.sdf",
-      "id": "XHcYFMDLuXYdE1Z06a3W"
-  },
-  {
-      "source": "",
-      "email": "gwgsgsd@gmai.ccc",
-      "birthday": "0002-02-22",
-      "phone": "+412412413413413",
-      "surname": "FFFFFFFF",
-      "passport": "FF2142412",
-      "nationality": "fFFF",
-      "name": "FFFFFFFF",
-      "createdAt": {
-          "seconds": 1726050174,
-          "nanoseconds": 398000000
-      },
-      "service": "Ultra",
-      "id": "XeLpcxRQI1adeYHNj2ou"
-  },
-  {
-      "source": "",
-      "service": "Others",
-      "name": "Hoal",
-      "email": "ffff@ff.f",
-      "createdAt": {
-          "seconds": 1726011485,
-          "nanoseconds": 82000000
-      },
-      "interests": "",
-      "phone": "+444444444",
-      "surname": "asdasd",
-      "id": "YjoJESajsEelDOjju9Mv"
-  },
-  {
-      "source": "",
-      "phone": "+999999099999",
-      "surname": "Familie",
-      "createdAt": {
-          "seconds": 1726014746,
-          "nanoseconds": 943000000
-      },
-      "name": "Name",
-      "service": "Others",
-      "interests": "",
-      "email": "adres@hm.com",
-      "id": "ZTMhQZx6PVazTKtet0pj"
-  },
-  {
-      "source": "df",
-      "interests": "sdf",
-      "phone": "+321231231223423",
-      "surname": "sdfsdf",
-      "name": "sdfsdf",
-      "service": "Others",
-      "email": "sdfsd@sfsfsd.sdf",
-      "createdAt": {
-          "seconds": 1725982223,
-          "nanoseconds": 434000000
-      },
-      "id": "aDFXY41KIXFIhnRPbSsA"
-  },
-  {
-      "name": "OPa",
-      "phone": "+66767677676",
-      "createdAt": {
-          "seconds": 1726013055,
-          "nanoseconds": 137000000
-      },
-      "email": "",
-      "surname": "Surname",
-      "interests": "",
-      "service": "Others",
-      "source": "",
-      "id": "aGyImRuEn1JoiaBDZuHT"
-  },
-  {
-      "passport": "213123123",
-      "createdAt": {
-          "seconds": 1726009434,
-          "nanoseconds": 447000000
-      },
-      "inpol": "32432423",
-      "surname": "Noname",
-      "nationality": "Holand",
-      "phone": "+213123123123",
-      "name": "LExa",
-      "source": "IDK",
-      "service": "Basic",
-      "birthday": "2024-09-18",
-      "mos": "43242342",
-      "email": "dddd@gg.c",
-      "id": "b11HXYJ4KgBlzOIGuryP"
-  },
-  {
-      "source": "",
-      "name": "Name",
-      "surname": "Family",
-      "interests": "",
-      "email": "poshta@gm.com",
-      "phone": "+567890678912",
-      "service": "Others",
-      "createdAt": {
-          "seconds": 1726014625,
-          "nanoseconds": 154000000
-      },
-      "id": "mOndCqV9l54YAo7pwWtq"
-  },
-  {
-      "source": "",
-      "surname": "saassaas",
-      "email": "123@sdf.sdf",
-      "interests": "",
-      "createdAt": {
-          "seconds": 1726012700,
-          "nanoseconds": 428000000
-      },
-      "phone": "+123123123123",
-      "name": "dasss",
-      "service": "Others",
-      "id": "myycwfy8PvNvJKNUYybD"
-  },
-  {
-      "message": "This is a test message.",
-      "name": "John Doe",
-      "createdAt": {
-          "seconds": 1725982104,
-          "nanoseconds": 602000000
-      },
-      "email": "john.doe@example.com",
-      "id": "nSwZR6lCG2AUBpeDkiEa"
-  },
-  {
-      "surname": "aaaaaa",
-      "phone": "+7777777777",
-      "name": "nnnnnn",
-      "interests": "",
-      "source": "",
-      "createdAt": {
-          "seconds": 1726012905,
-          "nanoseconds": 580000000
-      },
-      "email": "adas@sdf.sd",
-      "service": "Others",
-      "id": "sGkFdAA6t8zCNxtwCdk2"
-  },
-  {
-      "name": "NNN",
-      "service": "Others",
-      "source": "",
-      "phone": "+32422234234",
-      "surname": "FFF",
-      "createdAt": {
-          "seconds": 1726009472,
-          "nanoseconds": 310000000
-      },
-      "interests": "",
-      "email": "fff@ff.f",
-      "id": "yEqEYSsPl5HNW3ibDDsD"
-  },
-  {
-      "createdAt": {
-          "seconds": 1726049976,
-          "nanoseconds": 198000000
-      },
-      "mos": "22222222",
-      "nationality": "FFFFF",
-      "surname": "FFFFFF",
-      "passport": "222222222",
-      "email": "",
-      "source": "fff",
-      "birthday": "2222-02-22",
-      "name": "FFFFF",
-      "service": "Basic",
-      "phone": "+222222222222222",
-      "inpol": "22222222",
-      "id": "z83Rcz6mc5zl0ToCDvWN"
-  }
-]
+// export const rows = [
+//   {
+//       "interests": "",
+//       "service": "Others",
+//       "email": "33@dsf.sd",
+//       "createdAt": {
+//           "seconds": 1726010733,
+//           "nanoseconds": 449000000
+//       },
+//       "surname": "Now",
+//       "phone": "+11312312312",
+//       "source": "",
+//       "name": "Hola",
+//       "id": "A3Bk4XcKPpLnUoQy8sm0"
+//   },
+//   {
+//       "email": "john.doe@example.com",
+//       "message": "This is a test message.",
+//       "createdAt": {
+//           "seconds": 1725981178,
+//           "nanoseconds": 255000000
+//       },
+//       "name": "John Doe",
+//       "id": "BWaqpbCT0TDMDa71sjcL"
+//   },
+//   {
+//       "interests": "",
+//       "service": "Others",
+//       "name": "Nice",
+//       "surname": "Nice",
+//       "createdAt": {
+//           "seconds": 1725984545,
+//           "nanoseconds": 826000000
+//       },
+//       "phone": "+77777777777",
+//       "source": "",
+//       "email": "",
+//       "id": "ES5BrqdC4cbHzCIrIlSl"
+//   },
+//   {
+//       "surname": "Surnameassa",
+//       "interests": "",
+//       "service": "Others",
+//       "phone": "+456789456789",
+//       "name": "Name",
+//       "email": "poshta@hg.com",
+//       "source": "",
+//       "createdAt": {
+//           "seconds": 1726013876,
+//           "nanoseconds": 929000000
+//       },
+//       "id": "EXLIl9XURE8zFfnagytj"
+//   },
+//   {
+//       "nationality": "Somewhere",
+//       "source": "I don't knw",
+//       "mos": "44444444",
+//       "name": "Hopa",
+//       "inpol": "44444444",
+//       "email": "",
+//       "phone": "+55555555555",
+//       "passport": "333333333",
+//       "birthday": "2024-09-03",
+//       "createdAt": {
+//           "seconds": 1726009839,
+//           "nanoseconds": 219000000
+//       },
+//       "surname": "Nonamovich",
+//       "service": "Basic",
+//       "id": "FjxxvfFY8UO8BtXK1qOc"
+//   },
+//   {
+//       "surname": "Heck",
+//       "email": "hhhgg@sdf.sdf",
+//       "phone": "+3456789876543",
+//       "createdAt": {
+//           "seconds": 1726015433,
+//           "nanoseconds": 819000000
+//       },
+//       "service": "Others",
+//       "name": "MyName",
+//       "interests": "Nothing literally",
+//       "source": "From instagram",
+//       "id": "H0EsMFYTQ9XdHl2vDw1G"
+//   },
+//   {
+//       "phone": "+3412123123",
+//       "name": "saadas",
+//       "createdAt": {
+//           "seconds": 1726011832,
+//           "nanoseconds": 997000000
+//       },
+//       "source": "",
+//       "service": "Others",
+//       "email": "dad@sdfs.fsd",
+//       "interests": "",
+//       "surname": "asdasd",
+//       "id": "HYUBytu6eei1KMeLm1VD"
+//   },
+//   {
+//       "interests": "",
+//       "surname": "ss",
+//       "service": "Others",
+//       "phone": "+22112222222",
+//       "email": "",
+//       "source": "",
+//       "name": "ss",
+//       "createdAt": {
+//           "seconds": 1725983330,
+//           "nanoseconds": 224000000
+//       },
+//       "id": "NSHSbXv8bcevAkRjXaMf"
+//   },
+//   {
+//       "createdAt": {
+//           "seconds": 1726005870,
+//           "nanoseconds": 512000000
+//       },
+//       "source": "IDK",
+//       "surname": "Noname",
+//       "interests": "",
+//       "email": "",
+//       "phone": "+222222222222",
+//       "name": "Kekw",
+//       "service": "Others",
+//       "id": "Orx2NRe2s0mSnlWXIUwq"
+//   },
+//   {
+//       "email": "",
+//       "name": "sdfs",
+//       "interests": "",
+//       "surname": "dfsdf",
+//       "phone": "+33333333333",
+//       "createdAt": {
+//           "seconds": 1726005462,
+//           "nanoseconds": 328000000
+//       },
+//       "service": "Others",
+//       "source": "",
+//       "id": "TzZmc0mE91WgPLsLVdBF"
+//   },
+//   {
+//       "service": "Basic",
+//       "email": "fff@ff.f",
+//       "passport": "D23424234",
+//       "birthday": "2024-09-10",
+//       "nationality": "sdfsdf",
+//       "inpol": "22222222",
+//       "name": "dsff",
+//       "source": "",
+//       "phone": "+21312312312",
+//       "createdAt": {
+//           "seconds": 1726009735,
+//           "nanoseconds": 191000000
+//       },
+//       "surname": "sdsdf",
+//       "mos": "22222222",
+//       "id": "Vx3GE0P1QWCwGJ7Ofzwg"
+//   },
+//   {
+//       "service": "Others",
+//       "interests": "",
+//       "createdAt": {
+//           "seconds": 1726010807,
+//           "nanoseconds": 306000000
+//       },
+//       "source": "",
+//       "phone": "+123123123123",
+//       "surname": "dfsdf",
+//       "name": "dsfdsfs",
+//       "email": "sdfsd@sdff.sdf",
+//       "id": "XHcYFMDLuXYdE1Z06a3W"
+//   },
+//   {
+//       "source": "",
+//       "email": "gwgsgsd@gmai.ccc",
+//       "birthday": "0002-02-22",
+//       "phone": "+412412413413413",
+//       "surname": "FFFFFFFF",
+//       "passport": "FF2142412",
+//       "nationality": "fFFF",
+//       "name": "FFFFFFFF",
+//       "createdAt": {
+//           "seconds": 1726050174,
+//           "nanoseconds": 398000000
+//       },
+//       "service": "Ultra",
+//       "id": "XeLpcxRQI1adeYHNj2ou"
+//   },
+//   {
+//       "source": "",
+//       "service": "Others",
+//       "name": "Hoal",
+//       "email": "ffff@ff.f",
+//       "createdAt": {
+//           "seconds": 1726011485,
+//           "nanoseconds": 82000000
+//       },
+//       "interests": "",
+//       "phone": "+444444444",
+//       "surname": "asdasd",
+//       "id": "YjoJESajsEelDOjju9Mv"
+//   },
+//   {
+//       "source": "",
+//       "phone": "+999999099999",
+//       "surname": "Familie",
+//       "createdAt": {
+//           "seconds": 1726014746,
+//           "nanoseconds": 943000000
+//       },
+//       "name": "Name",
+//       "service": "Others",
+//       "interests": "",
+//       "email": "adres@hm.com",
+//       "id": "ZTMhQZx6PVazTKtet0pj"
+//   },
+//   {
+//       "source": "df",
+//       "interests": "sdf",
+//       "phone": "+321231231223423",
+//       "surname": "sdfsdf",
+//       "name": "sdfsdf",
+//       "service": "Others",
+//       "email": "sdfsd@sfsfsd.sdf",
+//       "createdAt": {
+//           "seconds": 1725982223,
+//           "nanoseconds": 434000000
+//       },
+//       "id": "aDFXY41KIXFIhnRPbSsA"
+//   },
+//   {
+//       "name": "OPa",
+//       "phone": "+66767677676",
+//       "createdAt": {
+//           "seconds": 1726013055,
+//           "nanoseconds": 137000000
+//       },
+//       "email": "",
+//       "surname": "Surname",
+//       "interests": "",
+//       "service": "Others",
+//       "source": "",
+//       "id": "aGyImRuEn1JoiaBDZuHT"
+//   },
+//   {
+//       "passport": "213123123",
+//       "createdAt": {
+//           "seconds": 1726009434,
+//           "nanoseconds": 447000000
+//       },
+//       "inpol": "32432423",
+//       "surname": "Noname",
+//       "nationality": "Holand",
+//       "phone": "+213123123123",
+//       "name": "LExa",
+//       "source": "IDK",
+//       "service": "Basic",
+//       "birthday": "2024-09-18",
+//       "mos": "43242342",
+//       "email": "dddd@gg.c",
+//       "id": "b11HXYJ4KgBlzOIGuryP"
+//   },
+//   {
+//       "source": "",
+//       "name": "Name",
+//       "surname": "Family",
+//       "interests": "",
+//       "email": "poshta@gm.com",
+//       "phone": "+567890678912",
+//       "service": "Others",
+//       "createdAt": {
+//           "seconds": 1726014625,
+//           "nanoseconds": 154000000
+//       },
+//       "id": "mOndCqV9l54YAo7pwWtq"
+//   },
+//   {
+//       "source": "",
+//       "surname": "saassaas",
+//       "email": "123@sdf.sdf",
+//       "interests": "",
+//       "createdAt": {
+//           "seconds": 1726012700,
+//           "nanoseconds": 428000000
+//       },
+//       "phone": "+123123123123",
+//       "name": "dasss",
+//       "service": "Others",
+//       "id": "myycwfy8PvNvJKNUYybD"
+//   },
+//   {
+//       "message": "This is a test message.",
+//       "name": "John Doe",
+//       "createdAt": {
+//           "seconds": 1725982104,
+//           "nanoseconds": 602000000
+//       },
+//       "email": "john.doe@example.com",
+//       "id": "nSwZR6lCG2AUBpeDkiEa"
+//   },
+//   {
+//       "surname": "aaaaaa",
+//       "phone": "+7777777777",
+//       "name": "nnnnnn",
+//       "interests": "",
+//       "source": "",
+//       "createdAt": {
+//           "seconds": 1726012905,
+//           "nanoseconds": 580000000
+//       },
+//       "email": "adas@sdf.sd",
+//       "service": "Others",
+//       "id": "sGkFdAA6t8zCNxtwCdk2"
+//   },
+//   {
+//       "name": "NNN",
+//       "service": "Others",
+//       "source": "",
+//       "phone": "+32422234234",
+//       "surname": "FFF",
+//       "createdAt": {
+//           "seconds": 1726009472,
+//           "nanoseconds": 310000000
+//       },
+//       "interests": "",
+//       "email": "fff@ff.f",
+//       "id": "yEqEYSsPl5HNW3ibDDsD"
+//   },
+//   {
+//       "createdAt": {
+//           "seconds": 1726049976,
+//           "nanoseconds": 198000000
+//       },
+//       "mos": "22222222",
+//       "nationality": "FFFFF",
+//       "surname": "FFFFFF",
+//       "passport": "222222222",
+//       "email": "",
+//       "source": "fff",
+//       "birthday": "2222-02-22",
+//       "name": "FFFFF",
+//       "service": "Basic",
+//       "phone": "+222222222222222",
+//       "inpol": "22222222",
+//       "id": "z83Rcz6mc5zl0ToCDvWN"
+//   }
+// ]
 
 // export const rows = [
 //   {

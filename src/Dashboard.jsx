@@ -8,6 +8,7 @@ import AppNavbar from './components/AppNavbar';
 import Header from './components/Header';
 import MainGrid from './components/MainGrid';
 import SideMenu from './components/SideMenu';
+import PopupDetails from './components/PopupDetails';
 import AppTheme from './shared-theme/AppTheme';
 import {
   chartsCustomizations,
@@ -23,10 +24,28 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
+const PopupContext = React.createContext();
+
+function PopupProvider({ children }) {
+  const [isPopupOpened, setPopupOpened, selectedParam] = React.useState(false);
+  
+  return (
+    <PopupContext.Provider value={{ isPopupOpened, setPopupOpened }}>
+      {children}
+      {isPopupOpened && <PopupDetails isPopupOpened={isPopupOpened} setPopupOpened={setPopupOpened} selectedParam={selectedParam}/>}
+    </PopupContext.Provider>
+  );
+}
+
+export function usePopup() {
+  return React.useContext(PopupContext);
+}
+
 export default function Dashboard(props) {
   const [page, setPage] = React.useState("Home");
 
   return (
+    <PopupProvider>
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: 'flex' }}>
@@ -41,6 +60,7 @@ export default function Dashboard(props) {
             overflow: 'auto',
           })}
         >
+         {/* <PopupDetails/> */}
           <Stack
             spacing={2}
             sx={{
@@ -51,10 +71,11 @@ export default function Dashboard(props) {
             }}
           >
             <Header page={page}/>
-            <MainGrid page={page}/>
+            <MainGrid page={page} />
           </Stack>
         </Box>
       </Box>
     </AppTheme>
+    </PopupProvider>
   );
 }
