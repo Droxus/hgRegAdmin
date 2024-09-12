@@ -15,6 +15,9 @@ export default class DataBase {
   #user;
 
   constructor() {
+    console.log(import.meta.env.VITE_FIREBASE_TOKEN);
+    console.log(atob(import.meta.env.VITE_FIREBASE_TOKEN));
+    console.log(JSON.parse(atob(import.meta.env.VITE_FIREBASE_TOKEN)));
     this.app = initializeApp(
       JSON.parse(atob(import.meta.env.VITE_FIREBASE_TOKEN))
     );
@@ -31,6 +34,7 @@ export default class DataBase {
   async signInWithGoogle() {
     try {
       const user = await Auth.signInWithPopup(this.auth, this.provider);
+      console.log(user);
       if (user) {
         this.#user.displayName = user.displayName;
         this.#user.email = user.email;
@@ -46,6 +50,7 @@ export default class DataBase {
   async checkUserLoginStatus() {
     return new Promise((resolve) =>
       Auth.onAuthStateChanged(this.auth, (user) => {
+        console.log(user);
         if (user) {
           this.#user.displayName = user.displayName;
           this.#user.email = user.email;
