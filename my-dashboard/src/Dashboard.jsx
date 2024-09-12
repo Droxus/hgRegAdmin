@@ -45,9 +45,9 @@ export default function Dashboard(props) {
             spacing={2}
             sx={{
               alignItems: 'center',
-              mx: 3,
+              mx: 5,
               pb: 10,
-              mt: { xs: 8, md: 0 },
+              mt: { xs: 8, md: 1 },
             }}
           >
             <Header page={page}/>

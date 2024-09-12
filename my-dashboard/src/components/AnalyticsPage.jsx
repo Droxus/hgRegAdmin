@@ -9,9 +9,9 @@ import ChartUserByCountry from "./ChartUserByCountry";
 
 const data = [
   {
-    title: "Basic",
+    title: "Запись",
     value: "14k",
-    interval: "Last 30 days",
+    interval: "Крайние 30 дней",
     trend: "up",
     data: [
       200, 24, 220, 260, 240, 380, 100, 240, 280, 240, 300, 340, 320, 360, 340,
@@ -19,9 +19,9 @@ const data = [
     ],
   },
   {
-    title: "Advanced",
+    title: "Запись и Внески",
     value: "325",
-    interval: "Last 30 days",
+    interval: "Крайние 30 дней",
     trend: "down",
     data: [
       1640, 1250, 970, 1130, 1050, 900, 720, 1080, 900, 450, 920, 820, 840, 600,
@@ -30,9 +30,9 @@ const data = [
     ],
   },
   {
-    title: "Ultra",
+    title: "Cопровождение",
     value: "200k",
-    interval: "Last 30 days",
+    interval: "Крайние 30 дней",
     trend: "neutral",
     data: [
       500, 400, 510, 530, 520, 600, 530, 520, 510, 730, 520, 510, 530, 620, 510,
@@ -40,9 +40,9 @@ const data = [
     ],
   },
   {
-    title: "Others",
+    title: "Другие услуги",
     value: "200k",
-    interval: "Last 30 days",
+    interval: "Крайние 30 дней",
     trend: "neutral",
     data: [
       500, 400, 510, 530, 520, 600, 530, 520, 510, 730, 520, 510, 530, 620, 510,
@@ -68,14 +68,13 @@ export default function AnalyticsPage() {
             <StatCard {...card} />
           </Grid>
         ))}
-        {/* <Grid size={{ xs: 12, sm: 6, lg: 3 }}></Grid> */}
-        <Grid size={{ sm: 12, md: 6 }}>
+        <Grid size={{ sm: 12, md: 4.5 }}>
           <SessionsChart />
         </Grid>
-        <Grid size={{ sm: 12, md: 6 }}>
+        <Grid size={{ sm: 12, md: 4.5 }}>
           <PageViewsBarChart />
         </Grid>
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid size={{ xs: 12, md: 3 }} spacing={2}>
           <Stack gap={2} direction={{ xs: "column", sm: "row", lg: "column" }}>
             <ChartUserByCountry />
           </Stack>
