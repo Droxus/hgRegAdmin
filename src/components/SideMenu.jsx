@@ -11,7 +11,7 @@ import MenuContent from "./MenuContent";
 import OptionsMenu from "./OptionsMenu";
 import { useData } from '../DataContext';
 
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const Drawer = styled(MuiDrawer)({
   width: drawerWidth,
@@ -60,7 +60,7 @@ export default function SideMenu({ page, setPage }) {
       >
         <Avatar
           sizes="small"
-          alt="Riley Carter"
+          alt="Avatar"
           src={db.user.photoURL}
           sx={{ width: 36, height: 36 }}
         />

@@ -51,20 +51,20 @@ export default function PageViewsBarChart() {
           ]}
           series={[
             {
-              id: 'page-views',
-              label: 'Page views',
+              id: 'basic',
+              label: 'Запсис',
               data: [2234, 3872, 2998, 4125, 3357, 2789, 2998],
               stack: 'A',
             },
             {
-              id: 'downloads',
-              label: 'Downloads',
+              id: 'advanced',
+              label: 'Записи и внески',
               data: [3098, 4215, 2384, 2101, 4752, 3593, 2384],
               stack: 'A',
             },
             {
-              id: 'conversions',
-              label: 'Conversions',
+              id: 'ulrta',
+              label: 'Сопровождение',
               data: [4051, 2275, 3129, 4693, 3904, 2038, 2275],
               stack: 'A',
             },

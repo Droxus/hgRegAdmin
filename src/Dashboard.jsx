@@ -60,7 +60,6 @@ export default function Dashboard(props) {
             overflow: 'auto',
           })}
         >
-         {/* <PopupDetails/> */}
           <Stack
             spacing={2}
             sx={{

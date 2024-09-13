@@ -42,7 +42,6 @@ export default class DataBase {
   async signInWithGoogle() {
     try {
       const user = await Auth.signInWithPopup(this.auth, this.provider);
-      console.log(user);
       if (user) {
         this.#user.displayName = user.displayName;
         this.#user.email = user.email;
@@ -58,7 +57,6 @@ export default class DataBase {
   async checkUserLoginStatus() {
     return new Promise((resolve) =>
       Auth.onAuthStateChanged(this.auth, (user) => {
-        console.log(user);
         if (user) {
           this.#user.displayName = user.displayName;
           this.#user.email = user.email;
@@ -81,7 +79,17 @@ export default class DataBase {
 
   async updateData() {
     this.#data = await this.getCollection("Data");
+    const entriesData = Object.entries(this.#data);
+    entriesData.sort(
+      ([, a], [, b]) => b.createdAt.seconds - a.createdAt.seconds
+    );
+    this.#data = Object.fromEntries(entriesData);
     this.#bin = await this.getCollection("Bin");
+    const entriesBin = Object.entries(this.#bin);
+    entriesBin.sort(
+      ([, a], [, b]) => b.createdAt.seconds - a.createdAt.seconds
+    );
+    this.#bin = Object.fromEntries(entriesBin);
   }
 
   async deleteDoc(id) {

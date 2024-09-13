@@ -84,8 +84,8 @@ export default function SessionsChart() {
           ]}
           series={[
             {
-              id: 'direct',
-              label: 'Direct',
+              id: 'basic',
+              label: 'Записи',
               showMark: false,
               curve: 'linear',
               stack: 'total',
@@ -98,8 +98,8 @@ export default function SessionsChart() {
               ],
             },
             {
-              id: 'referral',
-              label: 'Referral',
+              id: 'advanced',
+              label: 'Записи и Внески',
               showMark: false,
               curve: 'linear',
               stack: 'total',
@@ -112,8 +112,8 @@ export default function SessionsChart() {
               ],
             },
             {
-              id: 'organic',
-              label: 'Organic',
+              id: 'ultra',
+              label: 'Сопровождение',
               showMark: false,
               curve: 'linear',
               stack: 'total',
