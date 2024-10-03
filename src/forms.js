@@ -105,8 +105,8 @@ export const forms = {
       placeholder: "adres@gmail.com",
       maxlength: 32,
       minlength: 2,
-      required: false,
-      inputHelper: "Для связи с нами",
+      required: true,
+      inputHelper: "Для получения точной даты регистрации и фактуры для оплаты",
     },
     source: {
       id: "source",
@@ -203,8 +203,8 @@ export const forms = {
       placeholder: "adres@gmail.com",
       maxlength: 32,
       minlength: 2,
-      required: false,
-      inputHelper: "Для связи с нами",
+      required: true,
+      inputHelper: "Для получения точной даты регистрации и фактуры для оплаты",
     },
     source: {
       id: "source",
@@ -265,8 +265,8 @@ export const forms = {
       placeholder: "adres@gmail.com",
       maxlength: 32,
       minlength: 2,
-      required: false,
-      inputHelper: "Для связи с нами",
+      required: true,
+      inputHelper: "Для получения точной даты регистрации и фактуры для оплаты",
     },
     interests: {
       id: "interests",
@@ -531,8 +531,8 @@ export const forms = {
       placeholder: "adres@gmail.com",
       maxlength: 32,
       minlength: 2,
-      required: false,
-      inputHelper: "",
+      required: true,
+      inputHelper: "Для получения точной даты регистрации и фактуры для оплаты",
     },
     address: {
       id: "address",
