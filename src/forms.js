@@ -532,7 +532,7 @@ export const forms = {
       maxlength: 32,
       minlength: 2,
       required: true,
-      inputHelper: "",
+      inputHelper: "Для получения точной даты регистрации и фактуры для оплаты",
     },
     address: {
       id: "address",
